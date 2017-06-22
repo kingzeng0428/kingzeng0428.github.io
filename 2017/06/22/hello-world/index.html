@@ -99,7 +99,7 @@
 <meta property="og:url" content="https://kingzeng0428.github.io/2017/06/22/hello-world/index.html">
 <meta property="og:site_name" content="小亮的地方">
 <meta property="og:description" content="这就是我">
-<meta property="og:updated_time" content="2017-06-22T15:03:56.596Z">
+<meta property="og:updated_time" content="2017-06-22T15:22:41.830Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hello World">
 <meta name="twitter:description" content="这就是我">
@@ -346,8 +346,35 @@
       
 
       
-        <p>大家好，我是曾志亮，这是我的第一条博客。</p>
-
+        <script src=/js/crypto-js.js></script><script>
+function doDecrypt(pwd, onError) {
+	console.log("in doDecrypt");
+	var txt = document.getElementById("enc_content").innerHTML;
+	var plantext;
+	try {
+	  	var bytes = CryptoJS.AES.decrypt(txt, pwd);
+		plaintext = bytes.toString(CryptoJS.enc.Utf8);
+	} catch(err) {
+		if(onError) {onError(err);}
+		return;
+	}
+	document.getElementById("enc_content").innerHTML = plaintext;
+	document.getElementById("enc_content").style.display = "block";
+   document.getElementById("enc_passwd").style.display = "none";
+}
+</script>
+<div id="enc_content" style="display:none">U2FsdGVkX1+5cgaoLCxl0WwdBR6WM9+g3cTXXsBSVqf1wwQuE042Q5s3yVVjGdwLjf0XSMZUhvVfjZJN98gOWkLh3gPZCwe0ohGR/6EiPZKcwMy3BcdCoKqqCUqvfeMt</div><div id="enc_passwd"> <input id="enc_pwd_input" type="text" style="border-radius: 5px;border-style: groove;height: 30px;width: 50%;cursor: auto;font-size: 102%;color: currentColor;outline: none;text-overflow: initial;padding-left: 5px;" onkeydown="if (event.keyCode == 13) { decrypt(); return false;}"> <input type="submit" value="解&nbsp;密" onclick="decrypt()" style="width: 58px;height: 34px;border-radius: 5px;background-color: white;border-style: solid;color: currentColor;"><div id="enc_error" style="display: inline-block;color: #d84527;margin-left: 10px"></div>
+<script>
+var onError = function(error) {
+	document.getElementById("enc_error").innerHTML = "password error!"
+};
+function decrypt() {
+var passwd = document.getElementById("enc_pwd_input").value;
+console.log(passwd);
+doDecrypt(passwd, onError);
+}
+</script>
+</div>
       
     </div>
 
